@@ -218,7 +218,7 @@ const MainPage: React.FC<MainPageProps> = ({ userId, onSignOut }) => {
             ))}
           </select>
           <button onClick={() => findRoutes(selectedRouteConnection)} className="ms-3">Submit</button>
-          <button className="ms-3" onClick={() => (setShortestRoutes([]), setSelectedRouteConnection(""))}>Clear</button>
+          <button className="ms-3" onClick={() => {setShortestRoutes([]); setSelectedRouteConnection("");}}>Clear</button>
         </div>
         <br/>
 
