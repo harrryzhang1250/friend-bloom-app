@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import SignIn from './SignIn';
+import MainPage from './MainPage';
 
-function App() {
+const App: React.FC = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [currentUserId, setCurrentUserId] = useState<string>('');
+
+  const handleSignIn = (userId: string) => {
+    setCurrentUserId(userId);
+    setIsAuthenticated(true);
+  };
+
+  const handleSignOut = () => {
+    setIsAuthenticated(false);
+    setCurrentUserId('');
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {isAuthenticated ? (
+        <MainPage userId={currentUserId} onSignOut={handleSignOut} />
+      ) : (
+        <SignIn onSignIn={handleSignIn} />
+      )}
     </div>
   );
-}
+};
 
 export default App;

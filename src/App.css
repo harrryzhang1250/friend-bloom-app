@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+.wd-connections-frame {
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+}

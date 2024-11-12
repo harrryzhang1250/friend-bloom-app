@@ -1,0 +1,134 @@
+{
+  "users": [
+    {
+      "id": "A",
+      "name": "Alice",
+      "connections": ["B", "C", "E"]
+    },
+    {
+      "id": "B",
+      "name": "Bob",
+      "connections": ["A", "D", "F"]
+    },
+    {
+      "id": "C",
+      "name": "Charlie",
+      "connections": ["A", "G", "H"]
+    },
+    {
+      "id": "D",
+      "name": "David",
+      "connections": ["B", "I", "J"]
+    },
+    {
+      "id": "E",
+      "name": "Eve",
+      "connections": ["A", "K", "L"]
+    },
+    {
+      "id": "F",
+      "name": "Frank",
+      "connections": ["B", "M", "N"]
+    },
+    {
+      "id": "G",
+      "name": "Grace",
+      "connections": ["C", "O", "P"]
+    },
+    {
+      "id": "H",
+      "name": "Hank",
+      "connections": ["C", "Q", "R"]
+    },
+    {
+      "id": "I",
+      "name": "Ivy",
+      "connections": ["D", "S", "T"]
+    },
+    {
+      "id": "J",
+      "name": "Jack",
+      "connections": ["D", "U", "V"]
+    },
+    {
+      "id": "K",
+      "name": "Kara",
+      "connections": ["E", "W"]
+    },
+    {
+      "id": "L",
+      "name": "Leo",
+      "connections": ["E", "X"]
+    },
+    {
+      "id": "M",
+      "name": "Mia",
+      "connections": ["F", "Y"]
+    },
+    {
+      "id": "N",
+      "name": "Nina",
+      "connections": ["F", "Z"]
+    },
+    {
+      "id": "O",
+      "name": "Oscar",
+      "connections": ["G"]
+    },
+    {
+      "id": "P",
+      "name": "Paula",
+      "connections": ["G"]
+    },
+    {
+      "id": "Q",
+      "name": "Quinn",
+      "connections": ["H"]
+    },
+    {
+      "id": "R",
+      "name": "Rose",
+      "connections": ["H"]
+    },
+    {
+      "id": "S",
+      "name": "Sam",
+      "connections": ["I"]
+    },
+    {
+      "id": "T",
+      "name": "Tina",
+      "connections": ["I"]
+    },
+    {
+      "id": "U",
+      "name": "Uma",
+      "connections": ["J"]
+    },
+    {
+      "id": "V",
+      "name": "Victor",
+      "connections": ["J"]
+    },
+    {
+      "id": "W",
+      "name": "Wendy",
+      "connections": ["K"]
+    },
+    {
+      "id": "X",
+      "name": "Xander",
+      "connections": ["L"]
+    },
+    {
+      "id": "Y",
+      "name": "Yara",
+      "connections": ["M"]
+    },
+    {
+      "id": "Z",
+      "name": "Zane",
+      "connections": ["N"]
+    }
+  ]
+}
