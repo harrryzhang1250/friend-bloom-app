@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import userData from './data/userData.json';
 
 interface User {
@@ -32,16 +32,12 @@ const MainPage: React.FC<MainPageProps> = ({ userId, onSignOut }) => {
     setAvailableConnections(
       users.filter((u) => !currentUser.connections.includes(u.id) && u.id !== currentUser.id)
     );
-    selectedAddConnection? setSelectedAddConnection("") : setSelectedRemoveConnection("")
-  }, [userId, users]);
+    setSelectedAddConnection("")
+    setSelectedRemoveConnection("")
+  }, [userId, users, connections]);
 
-  useEffect(() => {
-    if (user) {
-      rearrangeMap(user.id);
-    }
-  }, [connections]);
 
-  const rearrangeMap = (startUserId: string) => {
+  const rearrangeMap = useCallback((startUserId: string) => {
     // BFS to determine the levels of connections
     const queue: [string, number][] = [[startUserId, 0]];
     const visited: Set<string> = new Set();
@@ -78,7 +74,13 @@ const MainPage: React.FC<MainPageProps> = ({ userId, onSignOut }) => {
     setLevelTwoConnections(levelTwo);
     setLevelThreeConnections(levelThree);
     setLevelFourConnections(levelFour);
-  };
+  }, [users]);
+
+  useEffect(() => {
+    if (user) {
+      rearrangeMap(user.id);
+    }
+  }, [user, connections, rearrangeMap]);
 
   const handleAddConnection = (selectedUser: string) => {
     // Update connections
@@ -91,9 +93,6 @@ const MainPage: React.FC<MainPageProps> = ({ userId, onSignOut }) => {
 
     // Remove from available connections
     setAvailableConnections((prevAvailable) => prevAvailable.filter((u) => u.id !== selectedUser));
-
-    // // Update message
-    // alert(`Connection Added Successfully with ${users.find((u) => u.id === selectedUser)?.name}`);
   };
 
   const handleRemoveConnection = (selectedUser: string) => {
@@ -113,9 +112,6 @@ const MainPage: React.FC<MainPageProps> = ({ userId, onSignOut }) => {
       }
       return prevAvailable;
     });
-    //
-    // // Update message
-    // alert(`Connection Removed Successfully with ${selectedUser}`);
   };
 
   return (
