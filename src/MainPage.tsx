@@ -23,6 +23,7 @@ const MainPage: React.FC<MainPageProps> = ({ userId, onSignOut }) => {
   const [levelTwoConnections, setLevelTwoConnections] = useState<string[]>([]);
   const [levelThreeConnections, setLevelThreeConnections] = useState<string[]>([]);
   const [levelFourConnections, setLevelFourConnections] = useState<string[]>([]);
+  const [disconnectedUsers, setDisconnectedUsers] = useState<string[]>([]);
 
   useEffect(() => {
     // Load user data from state based on logged in user
@@ -74,6 +75,13 @@ const MainPage: React.FC<MainPageProps> = ({ userId, onSignOut }) => {
     setLevelTwoConnections(levelTwo);
     setLevelThreeConnections(levelThree);
     setLevelFourConnections(levelFour);
+    setDisconnectedUsers(users.filter((u) =>
+      !levelOne.includes(u.id)
+      && !levelTwo.includes(u.id)
+      && !levelThree.includes(u.id)
+      && !levelFour.includes(u.id)
+      && u.id !== startUserId)
+      .map((u) => u.id));
   }, [users]);
 
   useEffect(() => {
@@ -187,6 +195,12 @@ const MainPage: React.FC<MainPageProps> = ({ userId, onSignOut }) => {
             <div className="col-md-2">Level-4 Connections</div>
             <div
               className="col-md-2 wd-connections-frame">{levelFourConnections.map((userId) => users.find((u) => u.id === userId)?.name).join(', ')}</div>
+          </div>
+          <br/>
+          <div className="row justify-content-center">
+            <div className="col-md-2">Disconnected Users</div>
+            <div
+              className="col-md-2 wd-connections-frame">{disconnectedUsers.map((userId) => users.find((u) => u.id === userId)?.name).join(', ')}</div>
           </div>
           <br/>
         </div>
