@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import userData from './data/userData.json';
 
 interface User {
@@ -19,11 +19,13 @@ const MainPage: React.FC<MainPageProps> = ({ userId, onSignOut }) => {
   const [availableConnections, setAvailableConnections] = useState<User[]>([]);
   const [selectedAddConnection, setSelectedAddConnection] = useState<string>('');
   const [selectedRemoveConnection, setSelectedRemoveConnection] = useState<string>('');
+  const [selectedRouteConnection, setSelectedRouteConnection] = useState<string>('');
   const [levelOneConnections, setLevelOneConnections] = useState<string[]>([]);
   const [levelTwoConnections, setLevelTwoConnections] = useState<string[]>([]);
   const [levelThreeConnections, setLevelThreeConnections] = useState<string[]>([]);
   const [levelFourConnections, setLevelFourConnections] = useState<string[]>([]);
   const [disconnectedUsers, setDisconnectedUsers] = useState<string[]>([]);
+  const [shortestRoutes, setShortestRoutes] = useState<string[][]>([]);
 
   useEffect(() => {
     // Load user data from state based on logged in user
@@ -35,8 +37,9 @@ const MainPage: React.FC<MainPageProps> = ({ userId, onSignOut }) => {
     );
     setSelectedAddConnection("")
     setSelectedRemoveConnection("")
+    setSelectedRouteConnection("")
+    setShortestRoutes([])
   }, [userId, users, connections]);
-
 
   const rearrangeMap = useCallback((startUserId: string) => {
     // BFS to determine the levels of connections
@@ -122,9 +125,40 @@ const MainPage: React.FC<MainPageProps> = ({ userId, onSignOut }) => {
     });
   };
 
+  // Using backtracking
+  const findRoutes = (targetUserId: string) => {
+    const routes: string[][] = [];
+    const path: string[] = [userId];
+    const targetLevel =
+      levelOneConnections.includes(targetUserId) ? 1 :
+        levelTwoConnections.includes(targetUserId) ? 2 :
+          levelThreeConnections.includes(targetUserId) ? 3 :
+            levelFourConnections.includes(targetUserId) ? 4 : 0;
+
+    const backtrack = (currentUserId: string, level: number) => {
+      if (currentUserId === targetUserId && level === targetLevel) {
+        routes.push([...path]);
+        return;
+      }
+
+      if (level >= targetLevel) return;
+
+      const currentUser = users.find((u) => u.id === currentUserId) as User;
+      currentUser.connections.forEach((connectionId) => {
+        if (!path.includes(connectionId)) {
+          path.push(connectionId);
+          backtrack(connectionId, level + 1);
+          path.pop();
+        }
+      });
+    };
+
+    backtrack(userId, 0);
+    setShortestRoutes(routes);
+  };
+
   return (
     <div className="main-container">
-
       <h2>Welcome to Friend Bloom, {user && user.name}</h2>
       <button onClick={onSignOut}>Sign Out</button>
       <br/><br/>
@@ -167,6 +201,38 @@ const MainPage: React.FC<MainPageProps> = ({ userId, onSignOut }) => {
           <button onClick={() => handleRemoveConnection(selectedRemoveConnection)} className="ms-3">Submit</button>
         </div>
         <br/>
+
+        <div className="find-route">
+          <label>Find Route &nbsp;</label>
+          <select
+            onChange={(e) => setSelectedRouteConnection(e.target.value)}
+            value={selectedRouteConnection}
+          >
+            <option value="" disabled>
+              Select a user to find route
+            </option>
+            {[...levelOneConnections, ...levelTwoConnections, ...levelThreeConnections, ...levelFourConnections].map((userId) => (
+              <option key={userId} value={userId}>
+                {users.find((u) => u.id === userId)?.name}
+              </option>
+            ))}
+          </select>
+          <button onClick={() => findRoutes(selectedRouteConnection)} className="ms-3">Submit</button>
+          <button className="ms-3" onClick={() => (setShortestRoutes([]), setSelectedRouteConnection(""))}>Clear</button>
+        </div>
+        <br/>
+
+        <div className="shortest-routes">
+          {shortestRoutes.length > 0 ? (
+            <ul>
+            {shortestRoutes.map((route, index) => (
+              <div key={index}>
+                {route.map((userId) => users.find((u) => u.id === userId)?.name).join(' -> ')}
+              </div>
+              ))}
+            </ul>
+          ) : ""}
+        </div>
 
       </div>
 

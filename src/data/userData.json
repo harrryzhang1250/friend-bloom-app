@@ -8,127 +8,127 @@
     {
       "id": "B",
       "name": "Bob",
-      "connections": ["A", "D", "F"]
+      "connections": ["A", "D", "F", "C", "E"]
     },
     {
       "id": "C",
       "name": "Charlie",
-      "connections": ["A", "G", "H"]
+      "connections": ["A", "G", "H", "B", "E"]
     },
     {
       "id": "D",
       "name": "David",
-      "connections": ["B", "I", "J"]
+      "connections": ["B", "I", "J", "N", "F", "C"]
     },
     {
       "id": "E",
       "name": "Eve",
-      "connections": ["A", "K", "L"]
+      "connections": ["A", "K", "L", "F", "B", "C"]
     },
     {
       "id": "F",
       "name": "Frank",
-      "connections": ["B", "M", "N"]
+      "connections": ["B", "M", "N", "D", "E", "I"]
     },
     {
       "id": "G",
       "name": "Grace",
-      "connections": ["C", "O", "P"]
+      "connections": ["C", "O", "P", "H", "D"]
     },
     {
       "id": "H",
       "name": "Hank",
-      "connections": ["C", "Q", "R"]
+      "connections": ["C", "Q", "R", "G", "I"]
     },
     {
       "id": "I",
       "name": "Ivy",
-      "connections": ["D", "S", "T"]
+      "connections": ["D", "S", "T", "J", "H", "F"]
     },
     {
       "id": "J",
       "name": "Jack",
-      "connections": ["D", "U", "V"]
+      "connections": ["D", "U", "V", "I", "N"]
     },
     {
       "id": "K",
       "name": "Kara",
-      "connections": ["E", "W"]
+      "connections": ["E", "W", "L", "X"]
     },
     {
       "id": "L",
       "name": "Leo",
-      "connections": ["E", "X"]
+      "connections": ["E", "X", "K", "W"]
     },
     {
       "id": "M",
       "name": "Mia",
-      "connections": ["F", "Y"]
+      "connections": ["F", "Y", "N", "Z"]
     },
     {
       "id": "N",
       "name": "Nina",
-      "connections": ["F", "Z"]
+      "connections": ["F", "Z", "M", "D", "J"]
     },
     {
       "id": "O",
       "name": "Oscar",
-      "connections": ["G"]
+      "connections": ["G", "P", "Q"]
     },
     {
       "id": "P",
       "name": "Paula",
-      "connections": ["G"]
+      "connections": ["G", "O", "R"]
     },
     {
       "id": "Q",
       "name": "Quinn",
-      "connections": ["H"]
+      "connections": ["H", "R", "O"]
     },
     {
       "id": "R",
       "name": "Rose",
-      "connections": ["H"]
+      "connections": ["H", "Q", "P"]
     },
     {
       "id": "S",
       "name": "Sam",
-      "connections": ["I"]
+      "connections": ["I", "T", "U"]
     },
     {
       "id": "T",
       "name": "Tina",
-      "connections": ["I"]
+      "connections": ["I", "S", "V"]
     },
     {
       "id": "U",
       "name": "Uma",
-      "connections": ["J"]
+      "connections": ["J", "V", "S"]
     },
     {
       "id": "V",
       "name": "Victor",
-      "connections": ["J"]
+      "connections": ["J", "U", "T"]
     },
     {
       "id": "W",
       "name": "Wendy",
-      "connections": ["K"]
+      "connections": ["K", "X", "L"]
     },
     {
       "id": "X",
       "name": "Xander",
-      "connections": ["L"]
+      "connections": ["L", "W", "K"]
     },
     {
       "id": "Y",
       "name": "Yara",
-      "connections": ["M"]
+      "connections": ["M", "Z", "N"]
     },
     {
       "id": "Z",
       "name": "Zane",
-      "connections": ["N"]
+      "connections": ["N", "Y", "M"]
     }
   ]
 }
