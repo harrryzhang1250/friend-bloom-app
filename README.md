@@ -1,47 +1,136 @@
-# Getting Started with Create React App
+# FriendBloom
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**FriendBloom** is a React-based application that visualizes social connections in a network. It simplifies certain operations to focus on the primary goal of showcasing relationships between users. This project uses a predefined `data.json` file to store user relationships and is deployed via Netlify.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **View network relationships**:
+  - Displays connections at various levels (Level 1 to Level 4).
+- **Add or remove connections**:
+  - Modify relationships between users dynamically.
+- **Find shortest routes**:
+  - Uses backtracking to compute the shortest path between two users.
+- **Display disconnected users**:
+  - Identifies users who are not directly or indirectly connected to the logged-in user.
 
-### `npm start`
+## Technology Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Frontend**: React
+- **Data Storage**: A predefined `data.json` file
+- **Deployment**: Netlify with Continuous Integration and Continuous Deployment (CI/CD)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## How to Use
 
-### `npm test`
+1. **Login**:
+   - Choose a user from the available list to login. No username or password input is required for simplicity.
+2. **Main Page**:
+   - The main page offers options to:
+     - Add a connection
+     - Remove a connection
+     - Find the shortest route to another user
+   - It also visualizes connections at different levels and lists disconnected users.
+3. **Adding a Connection**:
+   - Select a user from the "Add Connection" dropdown and click "Submit."
+4. **Removing a Connection**:
+   - Choose a user from the "Remove Connection" dropdown and click "Submit."
+5. **Finding Shortest Routes**:
+   - Pick a user from the "Find Route" dropdown and click "Submit" to display the shortest paths.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Project Structure
 
-### `npm run build`
+```plaintext
+/src
+  ├── data/
+  │     └── userData.json    # Stores the relationship data between users
+  ├── App.tsx           # Main functional component
+  │     
+  ├── styles.css       # Custom styling for the app
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Example Data Format
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The app uses a JSON file to store user relationships. Here's an example:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```json
+{
+  "users": [
+    {
+      "id": "A",
+      "name": "Alice",
+      "connections": ["B", "C", "E"]
+    },
+    {
+      "id": "B",
+      "name": "Bob",
+      "connections": ["A", "D", "F", "C", "E"]
+    },
+    {
+      "id": "C",
+      "name": "Charlie",
+      "connections": ["A", "B"]
+    },
+    {
+      "id": "D",
+      "name": "David",
+      "connections": ["B"]
+    },
+    {
+      "id": "E",
+      "name": "Eve",
+      "connections": ["A", "B"]
+    },
+    {
+      "id": "F",
+      "name": "Frank",
+      "connections": ["B"]
+    }
+  ]
+}
+```
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Deployment
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The app is deployed on **Netlify** for quick and seamless CI/CD.  
+Visit the live app [here](https://friendbloom.netlify.app).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### How to Deploy:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1. Push your code to the GitHub repository.
+2. Link the repository to Netlify.
+3. Any changes pushed to the repository will automatically redeploy the app.
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Main Functionality Description
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-# friend-bloom-app
+### Rearrange Map
+
+Uses **Breadth-First Search (BFS)** to categorize connections into levels:
+- **Level 1:** Direct connections.
+- **Level 2:** Connections of Level 1 users.
+- **Level 3:** Connections of Level 2 users.
+- **Level 4:** Connections of Level 3 users.
+
+Disconnected users are those who are not part of any of these levels.
+
+### Add Connection
+
+Allows the logged-in user to add a new user to their connection list.  
+Automatically updates the visualization.
+
+### Remove Connection
+
+Allows the logged-in user to remove an existing user from their connection list.  
+Automatically updates the visualization.
+
+### Find Routes
+
+Uses **backtracking** to find all shortest routes between the logged-in user and the target user.  
+Displays the possible routes clearly.
+
+---
+
+## License
+
+This project is **open-source** and available for use and modification under the specified license terms.
